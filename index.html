@@ -432,6 +432,14 @@ footer .fline{margin-top:22px;padding-top:22px;border-top:1px solid rgba(255,255
 .hero-video.on{opacity:1}
 .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(46,7,14,.96) 0%,rgba(78,13,24,.85) 38%,rgba(78,13,24,.45) 70%,rgba(78,13,24,.2) 100%)}
 @media(max-width:700px){.hero-overlay{background:linear-gradient(180deg,rgba(46,7,14,.9) 0%,rgba(78,13,24,.6) 40%,rgba(78,13,24,.75) 100%)}}
+
+/* senha da capa */
+.gate-pass{display:block;margin:6px auto 12px;width:min(300px,82vw);padding:14px 18px;border-radius:12px;border:1.5px solid rgba(198,161,91,.5);background:rgba(255,255,255,.08);color:#fff;font-size:15px;text-align:center;outline:none;letter-spacing:.05em}
+.gate-pass::placeholder{color:rgba(255,255,255,.5)}
+.gate-pass:focus{border-color:var(--ouro);background:rgba(255,255,255,.12)}
+.gate-err{color:#ffc2b8;font-size:13px;min-height:18px;margin-bottom:4px;font-weight:600}
+.shake{animation:shk .4s}
+@keyframes shk{0%,100%{transform:none}20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
 </style>
 </head>
 <body>
@@ -452,6 +460,8 @@ footer .fline{margin-top:22px;padding-top:22px;border-top:1px solid rgba(255,255
     <div class="gate-eyebrow">Apresentação Exclusiva</div>
     <h1 class="gate-title">Clínica Veterinária<br>Cães & Gatos</h1>
     <div class="gate-sub">com excelência em medicina felina</div>
+    <input id="gpass" type="password" class="gate-pass" placeholder="Senha de acesso" autocomplete="off" onkeydown="if(event.key==='Enter'){enterSite();}">
+    <div id="gerr" class="gate-err"></div>
     <button class="gate-btn" onclick="enterSite()">Entrar na apresentação →</button>
     <div class="gate-foot">Plano de negócios preparado por <b>Susana Vidal Mattioli de Lima</b><br>Itaim Paulista · São Paulo · Julho de 2026</div>
   </div>
@@ -1081,7 +1091,7 @@ footer .fline{margin-top:22px;padding-top:22px;border-top:1px solid rgba(255,255
 
 <script src="https://unpkg.com/lucide@latest"></script>
 <script>
-function enterSite(){document.getElementById('gate').classList.add('hidden');document.body.classList.add('entered');document.body.style.overflow='auto';window.scrollTo(0,0);setTimeout(function(){var g=document.getElementById('gate');if(g)g.style.display='none'},1150)}
+function enterSite(){var p=document.getElementById('gpass');if(p&&['susu','rose'].indexOf(p.value.trim().toLowerCase())===-1){var e=document.getElementById('gerr');if(e)e.textContent='Senha incorreta, tente de novo.';var gi=document.querySelector('.gate-inner');if(gi){gi.classList.remove('shake');void gi.offsetWidth;gi.classList.add('shake');}if(p)p.focus();return;}document.getElementById('gate').classList.add('hidden');document.body.classList.add('entered');document.body.style.overflow='auto';window.scrollTo(0,0);setTimeout(function(){var g=document.getElementById('gate');if(g)g.style.display='none'},1150)}
 function toggleMenu(){document.getElementById('menu').classList.toggle('open')}
 function closeMenu(){document.getElementById('menu').classList.remove('open')}
 // nav solid + progress
