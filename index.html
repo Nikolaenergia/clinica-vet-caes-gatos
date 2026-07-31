@@ -440,6 +440,13 @@ footer .fline{margin-top:22px;padding-top:22px;border-top:1px solid rgba(255,255
 .gate-err{color:#ffc2b8;font-size:13px;min-height:18px;margin-bottom:4px;font-weight:600}
 .shake{animation:shk .4s}
 @keyframes shk{0%,100%{transform:none}20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+
+/* apresentacao pagina a pagina */
+html{scroll-snap-type:y proximity}
+.hero,.blk,.cta{scroll-snap-align:start}
+.blk>.wrap,.cta>.wrap{opacity:0;transform:translateY(30px);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
+.blk.inview>.wrap,.cta.inview>.wrap{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.blk>.wrap,.cta>.wrap{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -542,7 +549,7 @@ footer .fline{margin-top:22px;padding-top:22px;border-top:1px solid rgba(255,255
   </div>
 </section>
 
-<!-- SUMÁRIO -->
+<!-- SUMÁRIO + PLANO EM 4 FASES (unificado) -->
 <section class="blk" id="sumario">
   <div class="wrap">
     <div class="eyebrow2 rv">01 · Visão geral</div>
@@ -554,42 +561,35 @@ footer .fline{margin-top:22px;padding-top:22px;border-top:1px solid rgba(255,255
       <div class="pillar rv"><div class="pn">03</div><div class="pbody"><h4>Diferencial felino</h4><p>Ser a clínica que trata o gato como poucas na região, o segmento que mais cresce e hoje é mal atendido.</p></div><span class="parr">&rarr;</span></div>
       <div class="pillar rv"><div class="pn">04</div><div class="pbody"><h4>Experiência e encantamento</h4><p>Atendimento que acolhe o tutor e fideliza pelo carinho, não só pela técnica. O que transforma cliente em fã.</p></div><span class="parr">&rarr;</span></div>
     </div>
-    <div class="callout rose rv"><h4>O pedido, em uma frase</h4><p>Que a então proprietária arrende a clínica para uma gestora técnica e organizada, recebendo um valor fixo e previsível todo mês, sem o desgaste do dia a dia, enquanto a clínica cresce como referência geral em cães e gatos, com um diferencial felino e uma experiência que a destacam da concorrência.</p></div>
-  </div>
-</section>
-
-<!-- ROADMAP EM FASES -->
-<section class="blk cream" id="roadmap">
-  <div class="wrap">
-    <div class="eyebrow2 rv">O roteiro · sumário do plano</div>
-    <h2 class="sec rv">O plano em 4 fases</h2>
-    <p class="lead2 rv">Do zero à clínica que é sua. Esta apresentação é uma jornada em quatro fases, na ordem em que as coisas acontecem na vida real. Clica em qualquer fase para pular direto pra ela.</p>
+    <h3 class="rv" style="font-family:var(--serif);color:var(--vinho);font-size:24px;margin:52px 0 6px">O plano em 4 fases</h3>
+    <p class="lead2 rv">Do zero à clínica que é sua: uma jornada em quatro fases, na ordem em que as coisas acontecem na vida real. Clica em qualquer fase para pular direto pra ela.</p>
     <div class="roadmap">
       <a class="phase rv" href="#mercado">
         <div class="pnum"><small>Fase</small><b>1</b></div>
         <div><h4>Conseguir o contrato</h4><div class="pdesc">Provar que a oportunidade é real e fechar o acordo com a proprietária, com uma saída jurídica em que a clínica vai virando sua.</div>
           <div class="ptags"><span class="pt">Mercado e Itaim</span><span class="pt">Conceito</span><span class="pt">Cases</span><span class="pt">Proposta</span><span class="pt">Contrato</span></div></div>
-        <div class="parrow">→</div>
+        <div class="parrow">&rarr;</div>
       </a>
-      <a class="phase rv d1" href="#diagnostico">
+      <a class="phase rv" href="#diagnostico">
         <div class="pnum"><small>Fase</small><b>2</b></div>
         <div><h4>Assumir a clínica</h4><div class="pdesc">Entrar, organizar o caos herdado e botar a máquina pra rodar já nos primeiros 90 dias, sem perder cliente na transição.</div>
           <div class="ptags"><span class="pt">Diagnóstico</span><span class="pt">Sistema e CRM</span><span class="pt">Equipe</span><span class="pt">Cronograma 90 dias</span></div></div>
-        <div class="parrow">→</div>
+        <div class="parrow">&rarr;</div>
       </a>
-      <a class="phase rv d2" href="#experiencia">
+      <a class="phase rv" href="#experiencia">
         <div class="pnum"><small>Fase</small><b>3</b></div>
         <div><h4>Criar a estrutura</h4><div class="pdesc">Montar a experiência que encanta e o ambiente que fideliza, o que transforma um atendimento comum numa marca inesquecível.</div>
           <div class="ptags"><span class="pt">Estrutura física</span><span class="pt">Experiência do tutor</span><span class="pt">Fidelização</span><span class="pt">Patrocínios</span></div></div>
-        <div class="parrow">→</div>
+        <div class="parrow">&rarr;</div>
       </a>
-      <a class="phase rv d3" href="#precos">
+      <a class="phase rv" href="#precos">
         <div class="pnum"><small>Fase</small><b>4</b></div>
         <div><h4>Estruturar e escalar</h4><div class="pdesc">Aumentar o ticket médio, ser encontrado no Google e no Instagram e crescer o faturamento até virar referência da região.</div>
           <div class="ptags"><span class="pt">Serviços e ticket</span><span class="pt">Marketing</span><span class="pt">Financeiro</span><span class="pt">Nome e crescimento</span></div></div>
-        <div class="parrow">→</div>
+        <div class="parrow">&rarr;</div>
       </a>
     </div>
+    <div class="callout rose rv" style="margin-top:34px"><h4>O pedido, em uma frase</h4><p>Que a então proprietária arrende a clínica para uma gestora técnica e organizada, recebendo um valor fixo e previsível todo mês, sem o desgaste do dia a dia, enquanto a clínica cresce como referência geral em cães e gatos, com um diferencial felino e uma experiência que a destacam da concorrência.</p></div>
   </div>
 </section>
 
@@ -1126,6 +1126,9 @@ var heroVids=[
  hv.addEventListener('canplay',function(){hv.classList.add('on')});
  load();
 })();
+// transicao pagina a pagina
+var pobs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('inview');}else{e.target.classList.remove('inview');}})},{threshold:0.12});
+document.querySelectorAll('section.blk, section.cta').forEach(function(s){pobs.observe(s);});
 document.body.style.overflow='hidden';
 try{lucide.createIcons()}catch(e){}
 </script>
