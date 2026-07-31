@@ -79,7 +79,7 @@ header.nav.solid{background:rgba(78,13,24,.96);backdrop-filter:blur(10px);box-sh
 }
 
 /* ---------- HERO ---------- */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;color:#fff;overflow:hidden}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;color:#fff;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;
   background-image:linear-gradient(90deg,rgba(50,8,16,.94) 0%,rgba(78,13,24,.82) 45%,rgba(78,13,24,.45) 100%),
    url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&w=1600&q=80');
@@ -447,6 +447,15 @@ html{scroll-snap-type:y proximity}
 .blk>.wrap,.cta>.wrap{opacity:0;transform:translateY(30px);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1)}
 .blk.inview>.wrap,.cta.inview>.wrap{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.blk>.wrap,.cta>.wrap{opacity:1;transform:none;transition:none}}
+
+/* fluidez + video centralizado no mobile */
+.hero-video,.gate-video{transform:translateZ(0);object-position:center center}
+@media(min-width:821px){.hero-video{object-position:right center}}
+@media(max-width:820px){
+  .blk>.wrap,.cta>.wrap{transform:translateY(20px)}
+  html{scroll-snap-type:y proximity}
+}
+.blk>.wrap,.cta>.wrap{will-change:opacity,transform}
 </style>
 </head>
 <body>
@@ -1114,20 +1123,22 @@ function animC(el){
 var cobs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){animC(e.target);cobs.unobserve(e.target)}})},{threshold:.5});
 document.querySelectorAll('[data-count]').forEach(function(el){cobs.observe(el)});
 // lock scroll while gate open
-// video rotativo do hero
+// video de fundo do hero (leve; celular roda 1 em loop, desktop alterna)
 var heroVids=[
- "https://videos.pexels.com/video-files/10252657/10252657-uhd_2560_1440_25fps.mp4",
  "https://videos.pexels.com/video-files/28638777/12438622_1920_1080_50fps.mp4",
  "https://videos.pexels.com/video-files/30973235/13240592_1920_1080_30fps.mp4"
 ];
-(function(){var hv=document.querySelector('.hero-video');if(!hv)return;var i=0;
- function load(){hv.src=heroVids[i];hv.load();var p=hv.play();if(p)p.then(function(){hv.classList.add('on')}).catch(function(){hv.classList.add('on')});}
- hv.addEventListener('ended',function(){hv.classList.remove('on');i=(i+1)%heroVids.length;setTimeout(load,300);});
+(function(){var hv=document.querySelector('.hero-video');if(!hv)return;
+ var mob=window.matchMedia('(max-width:820px)').matches;
  hv.addEventListener('canplay',function(){hv.classList.add('on')});
+ if(mob){hv.loop=true;hv.src=heroVids[0];hv.load();var pm=hv.play();if(pm)pm.catch(function(){hv.classList.add('on')});return;}
+ var i=0;
+ function load(){hv.src=heroVids[i];hv.load();var p=hv.play();if(p)p.then(function(){hv.classList.add('on')}).catch(function(){hv.classList.add('on')});}
+ hv.addEventListener('ended',function(){hv.classList.remove('on');i=(i+1)%heroVids.length;setTimeout(load,250);});
  load();
 })();
 // transicao pagina a pagina
-var pobs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('inview');}else{e.target.classList.remove('inview');}})},{threshold:0.12});
+var pobs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('inview');pobs.unobserve(e.target);}})},{threshold:0.08,rootMargin:'0px 0px -5% 0px'});
 document.querySelectorAll('section.blk, section.cta').forEach(function(s){pobs.observe(s);});
 document.body.style.overflow='hidden';
 try{lucide.createIcons()}catch(e){}
